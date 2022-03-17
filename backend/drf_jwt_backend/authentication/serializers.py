@@ -3,8 +3,7 @@ from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
-from .models import Comment
-from .models import Reply
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -45,12 +44,4 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         return user
 
-    class CommentSerializer(serializers.ModelSerializers):
-            class Meta:
-                model = Comment
-                fields = ['user', 'video_id', 'text', 'likes', 'dislikes']
-
-    class ReplySerializer(serializers.ModelSerializers):
-            class Meta:
-                model = Reply
-                fields = ['user', 'comment', 'text']
+    
