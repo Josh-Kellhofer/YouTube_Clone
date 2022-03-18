@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import Comment
 from .serializers import CommentSerializer
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -20,7 +21,7 @@ def get_all_comments(request, video_id):
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
-def user_comments(request):
+def user_comments(request, pk):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
@@ -34,7 +35,8 @@ def user_comments(request):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
     elif request.method == "PUT":
+        comments = get_object_or_404(Comment, pk=pk)
         serializer = CommentSerializer(comments, data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.save(user=request.user)
         return Response(serializer.data)
