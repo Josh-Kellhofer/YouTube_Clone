@@ -12,7 +12,7 @@ from .serializers import ReplySerializer
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_all_replies(request, video_id):
-    replies = Reply.objects.filter(video_id=video_id)
+def get_all_replies(request, user):
+    replies = Reply.objects.filter(user=user)
     serializer = ReplySerializer(replies, many=True)
     return Response(serializer.data)
