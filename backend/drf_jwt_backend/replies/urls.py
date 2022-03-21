@@ -6,4 +6,5 @@ from replies import views
 urlpatterns = [
     # path('', views.user_replies),
     path('replies/<str:user>/', views.get_all_replies),
+    path('reply/', views.user_replies),
 ]
