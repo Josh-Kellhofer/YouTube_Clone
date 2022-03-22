@@ -11,6 +11,7 @@ import AddCarPage from "./pages/AddCarPage/AddCarPage";
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import VideoPlayer from "./components/VideoPlayer/videoplayer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -19,7 +20,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Routes>
+       <Routes>
         <Route
           path="/"
           element={
