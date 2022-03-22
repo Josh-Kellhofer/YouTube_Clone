@@ -1,43 +1,70 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
-import axios from "axios";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth"
+import useCustomForm from "../../hooks/useCustomForm"
 
-const HomePage = () => {
-  // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
-  // The "token" value is the JWT token that you will send in the header of any request requiring authentication
-  const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
+let initialValues = {
+    make: "",
+    model: "",
+    year: "",
+}
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setCars(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchCars();
-  }, [token]);
-  return (
-    <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      <Link to="/addcar">Add Car!</Link>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
-        ))}
-    </div>
-  );
-};
 
-export default HomePage;
+const AddCarPage = () => {
+    const [user, token] = useAuth()
+    const navigate = useNavigate()
+    const [formData, handleInputChange, handleSubmit] = useCustomForm(initialValues, postNewCar)
+
+    async function postNewCar(){
+        try {
+            let response = await axios.post("http://127.0.0.1:8000/api/cars/", formData, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
+            navigate("/")
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    return (
+        <div className="container">
+        <h2>{user.username}</h2>
+            <form className="form" onSubmit={handleSubmit}>
+                <label>
+                    Make:{" "}
+                    <input
+                        type="text"
+                        name="make"
+                        value={formData.make}
+                        onChange={handleInputChange}
+                    />
+                </label>                
+                <label>
+                    Model:{" "}
+                    <input
+                        type="text"
+                        name="model"
+                        value={formData.model}
+                        onChange={handleInputChange}
+                    />
+                </label>                
+                <label>
+                    Year:{" "}
+                    <input
+                        type="text"
+                        name="year"
+                        value={formData.year}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <button>Add Car!</button>
+            </form>
+        </div>
+    );
+}
+ 
+export default AddCarPage
