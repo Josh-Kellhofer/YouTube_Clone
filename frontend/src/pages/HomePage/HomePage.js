@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import VideoPlayer from "../../components/VideoPlayer/videoplayer";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
+  const [videoId, setVideoId] = useState("");
   console.log(user);
   console.log(token);
+
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -30,6 +33,10 @@ const HomePage = () => {
   }, [token]);
   
   return (
+
+  <div>
+    <div className='video-player'><VideoPlayer videoId={videoId}/></div>
+  
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
       <Link to="/addcar">Add Car Right Here 😎</Link>
@@ -40,6 +47,7 @@ const HomePage = () => {
             {car.year} {car.model} {car.make}
           </p>
         ))}
+    </div>
     </div>
   );
 };
