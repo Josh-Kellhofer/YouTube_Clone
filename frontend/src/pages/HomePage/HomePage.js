@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
@@ -9,6 +10,8 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
+  console.log(user);
+  console.log(token);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -25,9 +28,12 @@ const HomePage = () => {
     };
     fetchCars();
   }, [token]);
+  
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
+      <Link to="/addcar">Add Car Right Here 😎</Link>
+
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
