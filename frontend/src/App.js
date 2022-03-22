@@ -30,7 +30,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/addcar" element={<PrivateRoute><AddCarPage/></PrivateRoute>}/>
+        <Route path="/addcar" element={<PrivateRoute><AddCarPage/></PrivateRoute>} />
       </Routes>
       <Footer />
     </div>
