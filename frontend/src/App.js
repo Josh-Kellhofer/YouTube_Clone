@@ -7,7 +7,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AddCarPage from "./pages/AddCarPage/AddCarPage";
-import SearchBar from "./components/SearchBar/SearchBar";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
