@@ -35,7 +35,7 @@ const HomePage = () => {
   return (
 
   <div>
-    <div className='video-player'><VideoPlayer videoId={videoId}/></div>
+    
   
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
