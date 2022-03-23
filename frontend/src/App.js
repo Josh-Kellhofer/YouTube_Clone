@@ -37,7 +37,9 @@ function App() {
 
   return (
     <div className="App">
+      <div>
       <SearchBar getSearchResults={getSearchResults}/>
+      </div>
       <VideoPlayer />
 
       <Navbar />
