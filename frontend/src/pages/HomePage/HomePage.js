@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-import VideoPlayer from "../../components/VideoPlayer/videoplayer";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)

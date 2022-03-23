@@ -12,8 +12,8 @@ import SearchBar from "./components/SearchBar/SearchBar";
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import VideoPlayer from "./components/VideoPlayer/videoplayer";
-import SearchBar from "./components/SearchBar/searchbar";
+import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
