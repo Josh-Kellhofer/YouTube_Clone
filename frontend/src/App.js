@@ -32,13 +32,17 @@ function App() {
   const [description, setDescription] = useState("")
 
   async function getSearchResults(searchTerm="bob ross"){
-  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet&type=video`);
+  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyCzwl2Qb44h1FgOaQGzNc-irAiTRdNrDsc&maxResults=5&part=snippet&type=video`);
+  setVideoId(response.data.items[0].id.videoId)
+  setDescription(response.data.items[0].snippet.description)
+  setTitle(response.data.items[0].snippet.title)
   setSearchResults(response.data)
   console.log(response.data.items)
 }
 
 
   return (
+  //  <div className="app-flex-contain">
     <div className="App">
       <Navbar />
       <div className="search-bar"><SearchBar getSearchResults={getSearchResults}/>
@@ -57,6 +61,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/addcar" element={<PrivateRoute><AddCarPage/></PrivateRoute>} />
       </Routes>
+      {/* </div> */}
       <Footer />
     </div>
   );

@@ -11,6 +11,7 @@ const SearchBar = (props) => {
     event.preventDefault();
     console.log(searchRequest)
     props.getSearchResults(searchRequest);
+    setSearchRequest('');
     } 
 
     return ( 
