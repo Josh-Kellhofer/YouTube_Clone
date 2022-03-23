@@ -18,32 +18,6 @@ import SearchBar from "./components/SearchBar/searchbar";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
-<<<<<<< HEAD
-import React, { useState, useEffect} from "react";
-import SearchBar from "./components/SearchBar/SearchBar";
-
-
-
-function App() {
-
-  const [searchResults, setSearchResults] = useState([""]);
-
-  useEffect(() => {
-    getSearchResults()
-  }, [])
-
-  async function getSearchResults(searchTerm="Soweto Gospel Choir Khumbya"){
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${searchTerm}&key={API KEY HERE}`);
-    console.log(response.data)
-    setSearchResults(response.data)
-  }
-
-  return (
-    <div className="App">
-      <div className="Search-Bar">
-        <SearchBar getSearchResults={getSearchResults}/>
-      </div>
-=======
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -66,7 +40,7 @@ function App() {
     <div className="App">
       <SearchBar getSearchResults={getSearchResults}/>
       <VideoPlayer />
->>>>>>> 12422d668a4b44593ce97886635ca9cced585f25
+
       <Navbar />
        <Routes>
         <Route
