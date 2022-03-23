@@ -27,7 +27,9 @@ function App() {
  }, [])
 
   const [searchResults, setSearchResults] = useState([]);
-  const [videoId, setVideoId] = useState('lLWEXRAnQd0')
+  const [videoId, setVideoId] = useState('lLWEXRAnQd0');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("")
 
   async function getSearchResults(searchTerm="bob ross"){
   let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet&type=video`);
@@ -38,12 +40,10 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-      <SearchBar getSearchResults={getSearchResults}/>
-      </div>
-      <VideoPlayer videoId={videoId}/>
-
       <Navbar />
+      <div className="search-bar"><SearchBar getSearchResults={getSearchResults}/>
+      </div>
+       <div className="video-player"><VideoPlayer videoId={videoId} description={description} title={title}/></div>
        <Routes>
         <Route
           path="/"
