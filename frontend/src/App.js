@@ -26,12 +26,13 @@ function App() {
     getSearchResults()
  }, [])
 
-  const [searchResults, setSearchResults] = useState([""]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [videoId, setVideoId] = useState('lLWEXRAnQd0')
 
   async function getSearchResults(searchTerm="bob ross"){
-  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet`);
-  console.log(response.data)
+  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet&type=video`);
   setSearchResults(response.data)
+  console.log(response.data.items)
 }
 
 
@@ -40,7 +41,7 @@ function App() {
       <div>
       <SearchBar getSearchResults={getSearchResults}/>
       </div>
-      <VideoPlayer />
+      <VideoPlayer videoId={videoId}/>
 
       <Navbar />
        <Routes>
