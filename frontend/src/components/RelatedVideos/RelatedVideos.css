@@ -1,10 +1,14 @@
 .related-vid {
   display: flex;
   margin-bottom: 10rem;
+  margin-top: 10rem;
+  border-style: solid;
+  justify-content: space-around;
+  flex-shrink: 2;
 }
 
 .related-image {
-  height: 150px;
-  width: 265px; 
+  height: 250px;
+  width: 300px; 
 }
   

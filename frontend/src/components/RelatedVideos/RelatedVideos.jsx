@@ -4,8 +4,9 @@ import "./RelatedVideos.css";
 const RelatedVideos = (props) => {
 
     return (  
+        <div><h2>RELATED VIDS</h2>
         <div className="related-vid">
-            <div><h2>RELATED VIDS</h2></div>
+            <div>
             {props.relatedVideos.map((element, index) => {
                 if (element.snippet){
                     return (
@@ -14,7 +15,10 @@ const RelatedVideos = (props) => {
                     </div>
                     )
                 }
+
             })}
+            </div>
+        </div>
         </div>
     );
 }
