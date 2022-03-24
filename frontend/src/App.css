@@ -61,4 +61,10 @@ button:hover {
   margin-left: 20 rem;
   margin-top: 10 rem;
 }
+
+.app-flex-contain {
+  display: flex;
+  background-color: rgb(19, 240, 166);
+  border-style: solid;
+}
   

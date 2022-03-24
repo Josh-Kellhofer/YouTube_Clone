@@ -4,7 +4,7 @@ import "./RelatedVideos.css";
 const RelatedVideos = (props) => {
 
     return (  
-        <div><h2>RELATED VIDS</h2>
+        <div className="text-related"><h2>RELATED VIDS</h2>
         <div className="related-vid">
             <div>
             {props.relatedVideos.map((element, index) => {

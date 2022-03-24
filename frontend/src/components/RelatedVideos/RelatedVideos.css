@@ -12,3 +12,8 @@
   width: 300px; 
 }
   
+.text-related {
+  display: flex;
+  border-style: solid;
+  /* margin-bottom: 10rem; */
+}

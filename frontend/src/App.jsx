@@ -14,11 +14,14 @@ import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import SearchBar from "./components/SearchBar/SearchBar";
 import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
+import Post from "./components/Post/Post";
+import Comments from "./components/Comments/Comments";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
+import useAuth from "./hooks/useAuth";
 
 function App() {
 
@@ -30,6 +33,7 @@ function App() {
 
  useEffect(() => {
    getRelatedVideos();
+   getComments();
     
 }, [])
 
@@ -38,6 +42,9 @@ function App() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("")
   const [relatedVideos, setRelatedVideos] = useState([]);
+  const [comments, setComments] = useState([""]);
+  const [post, setPostComment] = useState ([""]);
+  const[user, token] = useAuth();
 
   async function getSearchResults(searchTerm="bob ross"){
   let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet&type=video`);
@@ -54,18 +61,41 @@ function App() {
 
   }
 
+  async function getComments(){
+    let response = await axios.get(`http://127.0.0.1:8000/api/comments/${videoId}/`);
+    setComments(response.data)
+  }
+
+  async function postComment(){
+    let addComment = {
+      video_id: videoId,
+      // text: text,
+    }
+    let response = await axios.post("http://127.0.0.1:8000/api/comment/", addComment, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    });
+    setComments(response.data)
+    getComments();
+
+  }
+
+  
 
 
   return (
-  //  <div className="app-flex-contain">
+   <div className="app-flex-contain">
     <div className="App">
       <Navbar />
       <div className="search-bar"><SearchBar getSearchResults={getSearchResults}/>
       </div>
        <div className="video-player"><VideoPlayer videoId={videoId} description={description} title={title}/></div>
-       <div>
-         <div className="app-relatedvids"><RelatedVideos relatedVideos={relatedVideos} setVideoId={setVideoId} setTitle = {setTitle} setDescription = {setDescription}/></div>
-       </div>
+       <div><Post postComment = {postComment}/></div>
+       
+       {/* <div><Comments comments = {comments}/></div> */}
+      
+       
        <Routes>
         <Route
           path="/"
@@ -79,8 +109,12 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/addcar" element={<PrivateRoute><AddCarPage/></PrivateRoute>} />
       </Routes>
+      <div>
+         <div className="app-relatedvids"><RelatedVideos relatedVideos={relatedVideos} setVideoId={setVideoId} setTitle = {setTitle} setDescription = {setDescription}/></div>
+       </div>
       {/* </div> */}
       <Footer />
+    </div>
     </div>
   );
 }
