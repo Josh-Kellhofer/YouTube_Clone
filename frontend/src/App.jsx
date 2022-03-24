@@ -47,7 +47,7 @@ function App() {
   const[user, token] = useAuth();
 
   async function getSearchResults(searchTerm="bob ross"){
-  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet&type=video`);
+  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyBy7zQlHHSi0kNWszXfHAyTnrSq5xfCnSw&maxResults=5&part=snippet&type=video`);
   setVideoId(response.data.items[0].id.videoId)
   setDescription(response.data.items[0].snippet.description)
   setTitle(response.data.items[0].snippet.title)
@@ -56,7 +56,7 @@ function App() {
   }
 
   async function getRelatedVideos(){
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&part=snippet&maxResults=5&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA`);
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&part=snippet&maxResults=5&key=AIzaSyBy7zQlHHSi0kNWszXfHAyTnrSq5xfCnSw`);
     setRelatedVideos(response.data.items)
 
   }
@@ -76,8 +76,7 @@ function App() {
         Authorization: 'Bearer ' + token
       }
     });
-    setComments(response.data)
-    getComments();
+    setComments(response.data);
 
   }
 
