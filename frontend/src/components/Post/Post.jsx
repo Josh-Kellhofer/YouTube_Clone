@@ -15,7 +15,7 @@ const Post = (props) => {
          <div>
           <form className="post-container" onSubmit={handleSubmit}>
             <div>
-                <label className = 'comment-label' htmlFor="Comment">COMMENT:{" "}</label>
+                <label className = 'comment-label' htmlFor="Comment">YOUR COMMENT:{" "}</label>
                 <input type= "text" id = 'Comment' className="comment-box" value = {comment} onChange ={(event) => setComment(event.target.value)} />
             </div>
             <div className="comment-container">
