@@ -64,7 +64,7 @@ button:hover {
 
 .app-flex-contain {
   display: flex;
-  background-color: rgb(19, 240, 166);
+  background:linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url("https://cdnb.artstation.com/p/assets/images/images/006/272/147/large/jack-oldham-mountain-galaxy-background-1.jpg?1497300224&dl=1");
   border-style: solid;
 }
   
