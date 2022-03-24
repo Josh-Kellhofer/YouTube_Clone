@@ -13,6 +13,7 @@ import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import SearchBar from "./components/SearchBar/SearchBar";
+import RelatedVideos from "./components/RelatedVideos/RelatedVideos";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -23,28 +24,36 @@ function App() {
 
 
   useEffect(() => {
-    getSearchResults()
- }, [])
+    getSearchResults();
+  }, [])
+   
+
+ useEffect(() => {
+   getRelatedVideos();
+    
+}, [])
 
   const [searchResults, setSearchResults] = useState([]);
   const [videoId, setVideoId] = useState('lLWEXRAnQd0');
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("")
+  const [relatedVideos, setRelatedVideos] = useState([]);
 
   async function getSearchResults(searchTerm="bob ross"){
-  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyCzwl2Qb44h1FgOaQGzNc-irAiTRdNrDsc&maxResults=5&part=snippet&type=video`);
+  let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA&maxResults=5&part=snippet&type=video`);
   setVideoId(response.data.items[0].id.videoId)
   setDescription(response.data.items[0].snippet.description)
   setTitle(response.data.items[0].snippet.title)
   setSearchResults(response.data)
   console.log(response.data.items)
+  }
 
-  async function getRelatedVideos(searchTerm=""){
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&part=snippet&maxResults=5&key={API KEY HERE}`);
-    setSomething(response.data.items[0].snippet.thumbnails)
+  async function getRelatedVideos(){
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&part=snippet&maxResults=5&key=AIzaSyDoI2GmiuXSN53X42hS05oRoeZcY_luhzA`);
+    setRelatedVideos(response.data.items)
 
   }
-}
+
 
 
   return (
@@ -54,6 +63,9 @@ function App() {
       <div className="search-bar"><SearchBar getSearchResults={getSearchResults}/>
       </div>
        <div className="video-player"><VideoPlayer videoId={videoId} description={description} title={title}/></div>
+       <div>
+         <div className="app-relatedvids"><RelatedVideos relatedVideos={relatedVideos} setVideoId={setVideoId} setTitle = {setTitle} setDescription = {setDescription}/></div>
+       </div>
        <Routes>
         <Route
           path="/"
