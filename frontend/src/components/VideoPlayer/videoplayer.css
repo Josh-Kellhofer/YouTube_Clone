@@ -6,3 +6,11 @@
 .app-flex-contain {
   display: flex;
 }
+
+.video-description-title-contain {
+  width: 500px;
+  display: flex;
+  border-color: blue;
+  border-style: solid;
+  /* margin-top: .5rem; */
+  }

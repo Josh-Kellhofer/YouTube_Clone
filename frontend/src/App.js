@@ -38,6 +38,12 @@ function App() {
   setTitle(response.data.items[0].snippet.title)
   setSearchResults(response.data)
   console.log(response.data.items)
+
+  async function getRelatedVideos(searchTerm=""){
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&part=snippet&maxResults=5&key={API KEY HERE}`);
+    setSomething(response.data.items[0].snippet.thumbnails)
+
+  }
 }
 
 

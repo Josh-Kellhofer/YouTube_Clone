@@ -10,8 +10,10 @@ const VideoPlayer = (props) => {
         <div><iframe id="ytplayer" type="text/html" width="500" height="360"
         src= {jssrc}
         frameborder="0"></iframe>
-          <div><h2>TITLE: {props.title}</h2></div>
-          <div><h2>DESCRIPTION: {props.description}</h2></div>
+          <div className="video-description-title-contain"><h4>TITLE: {props.title}</h4>
+          
+          <div><h4>DESCRIPTION: {props.description}</h4></div>
+        </div>
         </div>
     );
 }
